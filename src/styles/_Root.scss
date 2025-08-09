@@ -1,0 +1,10 @@
+.content-container {
+    padding-block: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: min(90%, 50rem);
+    margin-inline: auto;
+}

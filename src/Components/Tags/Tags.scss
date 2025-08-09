@@ -1,0 +1,36 @@
+@import '../../styles/_config.scss';
+
+.tags {
+    border-radius: 5px;
+    padding-block: 5px;
+    padding-inline: 10px;
+    color: $smoke-white;
+    font-size: $tag-text;
+    font-weight: bold;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+
+    &.entrepreneurship  {
+        background-color: $brick-red;
+
+        &:hover {
+            background-color: darken($brick-red, 5%);
+        }
+    }
+
+    &.books {
+        background-color: $nostalic-green;
+
+        &:hover {
+            background-color: darken($nostalic-green, 5%);
+        }
+    }
+
+    &.technology {
+        background-color: $iron-gray;
+
+        &:hover {
+            background-color: darken($iron-gray, 5%);
+        }
+    }
+}
