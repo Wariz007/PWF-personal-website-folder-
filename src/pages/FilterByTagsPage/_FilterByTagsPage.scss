@@ -1,0 +1,11 @@
+@import '../../styles/Mixins';
+
+.FilterByTagsPage {
+    padding-block: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-inline: auto;
+    max-width: 364px;
+}

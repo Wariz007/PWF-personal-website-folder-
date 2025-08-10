@@ -1,9 +1,14 @@
 @import '../../styles/Config';
+@import '../../styles/mixins';
 
 .about-container {
     display: flex;
     flex-direction: column;
     gap: 15px;
+
+    @include respond-to(medium) {
+        width: 40%;
+    }
 
     h1 {
         font-size: $h1;

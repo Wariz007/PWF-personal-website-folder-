@@ -3,6 +3,10 @@
 @use './Root';
 @use '../Components/Navbar/Navbar.scss';
 @use '../Components/About/About.scss';
+@use '../Components/TitleCard/TitleCard.scss';
+@use '../Components/TitlesContainer/TitlesContainer.scss';
+@use '../pages/FilterPage/FilterPage.scss';
+@use '../pages/FilterByTagsPage/_FilterByTagsPage.scss';
 
 @font-face {
   font-family: 'Gilroy';
