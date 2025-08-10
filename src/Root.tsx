@@ -4,6 +4,7 @@ import About from "./Components/About/About";
 import TitlesContainer from "./Components/TitlesContainer/TitlesContainer";
 import FilterPage from '../src/pages/FilterPage/FilterPage';
 import FilterByTagsPage from './pages/FilterByTagsPage/FilterByTagsPage';
+import WritingsPage from './pages/WritingsPage/WritingsPage';
 
 
 
@@ -25,6 +26,9 @@ function Root() {
                 
                 {/*Filter by tags page*/}
                 <Route path="/tag/:tag" element={<FilterByTagsPage />} />
+
+                {/*page for writings*/}
+                <Route path="/writings/:id" element={<WritingsPage />} />
             </Routes>
 
 

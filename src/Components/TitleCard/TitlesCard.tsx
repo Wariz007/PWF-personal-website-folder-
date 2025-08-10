@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 type title = {
     id: number;
     title: string;
@@ -9,9 +11,10 @@ type title = {
 
 function Title({ id, title, tag, date, writing, full }: title) {
     const [day, month, year] = date.split("-");
+    const navigate = useNavigate();
 
     return (
-        <button key={id} className={`title ${id}`}>
+        <button key={id} className={`title ${id}`} onClick={() => navigate(`/writings/${id}`)}>
             <div className="date">
                 <span>{day}</span>
                 <span>{month}</span>

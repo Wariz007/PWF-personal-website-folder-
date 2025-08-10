@@ -18,8 +18,8 @@ function FilterByTagsPage() {
             {filteredWritings.map((writing) => {
                 return (
                     <TitleCard 
-                        id={writing.id}
                         key={writing.id}
+                        id={writing.id}
                         title={writing.title}
                         date={writing.date}
                         tag={<Tags label={writing.tag} />}
