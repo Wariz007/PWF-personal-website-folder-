@@ -8,22 +8,20 @@ function WritingsPage() {
     const { id } = useParams<{ id: string }>();
     const writing = writings.find((writing) => writing.id === Number(id));
 
+    if (!writing) {
+        return <p>Writing not found.</p>;
+    }
+
     return (
         <div className="writing-container">
-            {writing ? (
-                <>
-                    <h1 className="writing-title">{writing.title}</h1>
-                    <div className="writing-meta">
-                        <span className="writing-date">{writing.date}</span>
-                        <Tags label={writing.tag} />
-                    </div>
-                    <div className="writing-content">
-                        <ReactMarkdown>{writing.writing}</ReactMarkdown>
-                    </div>
-                </>
-            ) : (
-                <p>Writing not found.</p>
-            )}
+            <h1 className="writing-title">{writing.title}</h1>
+            <div className="writing-meta">
+                <span className="writing-date">{writing.date}</span>
+                <Tags label={writing.tag} />
+            </div>
+            <div className="writing-content">
+                <ReactMarkdown>{writing.writing}</ReactMarkdown>
+            </div>
         </div>
     );
 }

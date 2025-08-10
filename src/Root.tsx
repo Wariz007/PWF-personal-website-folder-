@@ -31,7 +31,6 @@ function Root() {
                 <Route path="/writings/:id" element={<WritingsPage />} />
             </Routes>
 
-
         </div>
     )
 }
