@@ -4,7 +4,7 @@ import './styles/main.scss';
 import { BrowserRouter } from 'react-router-dom';
 
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/PWF-personal-website-folder-/">
     <Root />
-  </BrowserRouter>,
-)
+  </BrowserRouter>
+);

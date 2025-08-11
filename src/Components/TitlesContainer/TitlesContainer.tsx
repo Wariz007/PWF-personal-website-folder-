@@ -17,7 +17,7 @@ function TitlesContainer() {
     useEffect(() => {
         const fetchTitles = async () => {
             try {
-                const response = await fetch('/writings.json');
+                const response = await fetch(import.meta.env.BASE_URL + 'writings.json');
                 const data = await response.json();
                 setTitles(data);
             } catch(err) {
