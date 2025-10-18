@@ -7,7 +7,7 @@ function About() {
         <>
             <section className="about-container">
                 <h1>Olusanya Olabode <br />Abdulwariz</h1>
-                <p>This website is a collection of Wariz thoughts and opinions on how technology, entrepreneurship, and economics can contribute to the prosperity of the Federal Republic of Nigeria.</p>
+                <p>This website is a collection of Wariz thoughts and opinions on how technology, entrepreneurship, and books can contribute to the prosperity of the Federal Republic of Nigeria.</p>
                 <div className='contact-links'>
                     <a 
                         href="https://mail.google.com/mail/?view=cm&to=olusanyaolabodeabdulwariz@gmail.com"
