@@ -15,10 +15,18 @@ function WritingsPage() {
     return (
         <div className="writing-container">
             <h1 className="writing-title">{writing.title}</h1>
+
             <div className="writing-meta">
                 <span className="writing-date">{writing.date}</span>
                 <Tags label={writing.tag} />
             </div>
+
+            {writing.image && (
+                <div>
+                    <img src={`${import.meta.env.BASE_URL}${writing.image}`} alt={writing.title} />
+                </div>
+            )}
+
             <div className="writing-content">
                 <ReactMarkdown>{writing.writing}</ReactMarkdown>
             </div>
