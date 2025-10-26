@@ -8,6 +8,7 @@ const writingSchema = new mongoose.Schema({
   date: { type: String }, // keeping as string since format is "03-08-25"
   uploaded: { type: Boolean, default: false },
   writing: { type: String, required: true },
+  image: { type: String},
 });
 
 const Writing = mongoose.model("Writing", writingSchema);

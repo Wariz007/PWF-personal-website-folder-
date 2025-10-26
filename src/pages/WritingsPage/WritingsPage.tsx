@@ -11,6 +11,7 @@ interface Writing {
   date: string;
   uploaded: boolean;
   writing: string;
+  image: string; 
 }
 
 function WritingsPage() {
@@ -22,7 +23,7 @@ function WritingsPage() {
     fetch("http://localhost:5000/api/writings")
       .then((res) => res.json())
       .then((data: Writing[]) => {
-        console.log("Fetched writings:", data); // 👈 See what comes back
+        console.log("Fetched writings:", data);
         const found = data.find((w) => w.id === Number(id));
         setWriting(found || null);
         setLoading(false);
@@ -39,10 +40,21 @@ function WritingsPage() {
   return (
     <div className="writing-container">
       <h1 className="writing-title">{writing.title}</h1>
+
       <div className="writing-meta">
         <span className="writing-date">{writing.date}</span>
         <Tags label={writing.tag} />
       </div>
+
+      {writing.image && (
+        <div className="writing-image">
+          <img
+            src={`http://localhost:5000${writing.image}`}
+            alt={writing.title}
+          />
+        </div>
+      )}
+
       <div className="writing-content">
         <ReactMarkdown>{writing.writing}</ReactMarkdown>
       </div>
