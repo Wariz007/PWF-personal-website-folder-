@@ -5,13 +5,14 @@ import Tags from "../../Components/Tags/Tags";
 import ReactMarkdown from "react-markdown";
 
 interface Writing {
-  id: number;
+  _id: string;       // MongoDB ObjectId
+  id: number;        // numeric id
   title: string;
   tag: string;
   date: string;
   uploaded: boolean;
   writing: string;
-  image: string; 
+  image?: string;    // optional, in case no image
 }
 
 function WritingsPage() {
@@ -24,7 +25,10 @@ function WritingsPage() {
       .then((res) => res.json())
       .then((data: Writing[]) => {
         console.log("Fetched writings:", data);
+
+        // Compare numeric id from URL to database numeric id
         const found = data.find((w) => w.id === Number(id));
+
         setWriting(found || null);
         setLoading(false);
       })
