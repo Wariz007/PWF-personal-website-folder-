@@ -18,16 +18,28 @@ router.get("/", async (req, res) => {
 // ---------------- POST new writing ----------------
 router.post("/", async (req, res) => {
   try {
-    const { id, title, tag, date, writing } = req.body;
+    const { id, title, tag, date, image, uploaded, writing } = req.body;
 
     if (!id || !title || !tag || !date || !writing) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const newWriting = new Writing({ id, title, tag, date, writing });
+    const newWriting = new Writing({
+      id,
+      title,
+      tag,
+      date,
+      image: image || "", 
+      uploaded: uploaded || false,
+      writing
+    });
+
     await newWriting.save();
 
-    res.status(201).json({ message: "✅ Writing saved successfully", newWriting });
+    res.status(201).json({
+      message: "✅ Writing saved successfully",
+      newWriting
+    });
   } catch (err) {
     console.error("❌ Error saving writing:", err.message);
     res.status(400).json({ message: "Error saving writing", error: err.message });
