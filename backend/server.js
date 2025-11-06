@@ -23,8 +23,8 @@ const __dirname = dirname(__filename);
 app.use(cors()); // enables CORS for all routes
 app.use(express.json()); // parse JSON bodies
 
-// to Serve static files (images, etc.) from backend/public
-app.use("/public", express.static(join(__dirname, "public")));
+// Serve images directly from /public/images
+app.use("/images", express.static(join(__dirname, "public/images")));
 
 // Routes
 app.use("/api/writings", writingRouter);
