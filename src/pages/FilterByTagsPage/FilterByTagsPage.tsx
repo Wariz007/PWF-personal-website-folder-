@@ -22,7 +22,7 @@ function FilterByTagsPage() {
   useEffect(() => {
     const fetchWritings = async () => {
       try {
-        const response = await fetch('http://13.61.21.78:5000/api/writings');
+        const response = await fetch('https://olusanyaolabodeabdulwariz.com/api/writings');
         const data: Writing[] = await response.json();
         setWritings(data);
         setLoading(false);

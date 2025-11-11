@@ -21,7 +21,7 @@ function WritingsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://13.61.21.78:5000/api/writings")
+    fetch("https://olusanyaolabodeabdulwariz.com/api/writings")
       .then((res) => res.json())
       .then((data: Writing[]) => {
         console.log("Fetched writings:", data);
@@ -53,7 +53,7 @@ function WritingsPage() {
       {writing.image && (
         <div className="writing-image">
           <img
-            src={`http://13.61.21.78:5000${writing.image}`}
+            src={`https://olusanyaolabodeabdulwariz.com${writing.image}`}
             alt={writing.title}
           />
         </div>
