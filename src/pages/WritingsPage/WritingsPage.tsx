@@ -53,7 +53,7 @@ function WritingsPage() {
       {writing.image && (
         <div className="writing-image">
           <img
-            src={`http://13.61.21.78:5000${writing.image}`}
+            src={`https://olusanyaolabodeabdulwariz.com${writing.image}`}
             alt={writing.title}
           />
         </div>
