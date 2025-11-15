@@ -21,7 +21,7 @@ function WritingsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://13.61.21.78:5000/api/writings")
+    fetch('http://localhost:5000/api/writings')
       .then((res) => res.json())
       .then((data: Writing[]) => {
         console.log("Fetched writings:", data);
