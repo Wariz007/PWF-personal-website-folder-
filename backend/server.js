@@ -16,7 +16,14 @@ const __dirname = dirname(__filename);
 
 app.use(cors());
 app.use(express.json());
-app.use("/images", express.static(join(__dirname, "public/images")));
+app.use(
+  "/images",
+  (req, res, next) => {
+    res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    next();
+  },
+  express.static(join(__dirname, "public/images"))
+);
 
 // 🔐 Auth route
 app.post("/api/login", login);

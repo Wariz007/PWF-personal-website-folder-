@@ -29,14 +29,15 @@ router.post("/", upload.single("image"), async (req, res) => {
     if (!id || !title || !tag || !date || !writing)
       return res.status(400).json({ message: "All fields are required" });
 
-    const imagePath = req.file ? `/images/${req.file.filename}` : "";
+    // store only filename in DB
+    const imageFilename = req.file ? req.file.filename : "";
 
     const newWriting = new Writing({
       id,
       title,
       tag,
       date,
-      image: imagePath,
+      image: imageFilename,
       writing
     });
 
@@ -45,36 +46,10 @@ router.post("/", upload.single("image"), async (req, res) => {
     res.status(201).json({
       message: "✅ Writing saved successfully",
       newWriting,
-      imageUrl: imagePath
+      imageUrl: imageFilename
     });
   } catch (err) {
     res.status(400).json({ message: "Error saving writing", error: err.message });
-  }
-});
-
-// ---------- PATCH ----------
-router.patch("/:id", async (req, res) => {
-  try {
-    const updatedWriting = await Writing.findOneAndUpdate(
-      { id: Number(req.params.id) },
-      req.body,
-      { new: true }
-    );
-    if (!updatedWriting) return res.status(404).json({ message: "Writing not found" });
-    res.status(200).json({ message: "✅ Writing updated successfully", updatedWriting });
-  } catch (err) {
-    res.status(500).json({ message: "Error updating writing", error: err.message });
-  }
-});
-
-// ---------- DELETE ----------
-router.delete("/:id", async (req, res) => {
-  try {
-    const deleted = await Writing.findOneAndDelete({ id: Number(req.params.id) });
-    if (!deleted) return res.status(404).json({ message: "Writing not found" });
-    res.status(200).json({ message: "✅ Writing deleted successfully" });
-  } catch (err) {
-    res.status(500).json({ message: "Error deleting writing", error: err.message });
   }
 });
 
