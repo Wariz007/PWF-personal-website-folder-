@@ -15,7 +15,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // --- MIDDLEWARE ---
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:3000",                      
+    "https://olusanyaolabodeabdulwariz.com",     
+    "https://www.olusanyaolabodeabdulwariz.com"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 app.use(
   "/images",

@@ -6,7 +6,6 @@ const writingSchema = new mongoose.Schema({
   title: { type: String, required: true },
   tag: { type: String },
   date: { type: String },
-  uploaded: { type: Boolean, default: false },
   writing: { type: String, required: true },
   image: { type: String},
 });
