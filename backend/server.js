@@ -14,6 +14,7 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// --- MIDDLEWARE ---
 app.use(cors());
 app.use(express.json());
 app.use(
@@ -31,7 +32,7 @@ app.post("/api/login", login);
 // 🧾 Public routes
 app.use("/api/writings", writingRouter);
 
-// 🧱 Example protected route (for admin actions)
+// 🧱 Protected route for admin actions
 app.use("/api/admin/writings", verifyToken, writingRouter);
 
 // 🚀 Start server
