@@ -19,7 +19,7 @@ function TitlesContainer() {
   useEffect(() => {
     const fetchTitles = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/writings');
+        const response = await fetch("https://pwf-backend-code-production.up.railway.app/api/writings");
         const data: Title[] = await response.json();
 
         // helper to safely convert "DD-MM-YY" -> "YYYY-MM-DD"

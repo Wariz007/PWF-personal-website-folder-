@@ -21,7 +21,7 @@ function WritingsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/writings')
+    fetch("https://pwf-backend-code-production.up.railway.app/api/writings")
       .then((res) => res.json())
       .then((data: Writing[]) => {
         console.log("Fetched writings:", data);
@@ -53,7 +53,7 @@ function WritingsPage() {
       {writing.image && (
         <div className="writing-image">
           <img
-            src={`http://localhost:5000/images/${writing.image}`}
+            src={writing.image}
             alt={writing.title}
           />
         </div>
