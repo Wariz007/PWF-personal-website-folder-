@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import TitleCard from '../TitleCard/TitlesCard';
+import TitleCard from '../TitleCard/TitlesCard';
 import Tag from '../Tags/Tags';
 
 type Title = {
@@ -68,3 +69,4 @@ function TitlesContainer() {
 }
 
 export default TitlesContainer;
+
