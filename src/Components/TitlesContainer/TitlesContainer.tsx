@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import TitleCard from '../TitleCard/TitlesCard';
-import TitleCard from '../TitleCard/TitlesCard';
 import Tag from '../Tags/Tags';
 
 type Title = {
@@ -8,9 +7,6 @@ type Title = {
   title: string;
   tag: string;
   date: string;
-  writing?: string;
-  full?: boolean;
-  pinned?: boolean; // optional future-proof property
 };
 
 function TitlesContainer() {
@@ -20,22 +16,22 @@ function TitlesContainer() {
   useEffect(() => {
     const fetchTitles = async () => {
       try {
-        const response = await fetch("https://pwf-backend-code-production.up.railway.app/api/writings");
+        // Fetch from local JSON in public folder
+        const response = await fetch("/data/writings.json");
         const data: Title[] = await response.json();
 
-        // helper to safely convert "DD-MM-YY" -> "YYYY-MM-DD"
+        // helper to safely convert "DD-MM-YYYY" or "DD-MM-YY" -> "YYYY-MM-DD"
         const parseDate = (dateStr: string) => {
-          const [day, month, year] = dateStr.split('-');
-          return new Date(`20${year}-${month}-${day}`);
+          const parts = dateStr.split('-');
+          let year = parts[2];
+          if (year.length === 2) year = `20${year}`;
+          return new Date(`${year}-${parts[1]}-${parts[0]}`);
         };
 
         // Pin logic + sorting
         const sortedData = data.sort((a, b) => {
-          // 1️⃣ Always keep "My plans. My ambition" on top
           if (a.title === 'My plans. My ambition') return -1;
           if (b.title === 'My plans. My ambition') return 1;
-
-          // 2️⃣ Sort others by latest date first
           return parseDate(b.date).getTime() - parseDate(a.date).getTime();
         });
 
@@ -61,7 +57,6 @@ function TitlesContainer() {
           title={title.title}
           tag={<Tag label={title.tag} />}
           date={title.date}
-          writing={title.writing}
         />
       ))}
     </div>
@@ -69,4 +64,3 @@ function TitlesContainer() {
 }
 
 export default TitlesContainer;
-

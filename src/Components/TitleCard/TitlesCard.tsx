@@ -1,20 +1,22 @@
 import { useNavigate } from "react-router-dom";
 
-type title = {
+type TitleProps = {
     id: number;
     title: string;
     tag: React.ReactNode;
     date: string;
-    writing?: string;
-    full?: boolean; 
-}
+};
 
-function Title({ id, title, tag, date, writing, full }: title) {
+function TitleCard({ id, title, tag, date }: TitleProps) {
     const [day, month, year] = date.split("-");
     const navigate = useNavigate();
 
     return (
-        <button key={id} className={`title ${id}`} onClick={() => navigate(`/writings/${id}`)}>
+        <button
+            key={id}
+            className={`title ${id}`}
+            onClick={() => navigate(`/writings/${id}`)}
+        >
             <div className="date">
                 <span>{day}</span>
                 <span>{month}</span>
@@ -22,9 +24,8 @@ function Title({ id, title, tag, date, writing, full }: title) {
             </div>
             <h2 className="writing-title">{title}</h2>
             <span>{tag}</span>
-            {full && <p style={{ display: 'none' }}>{writing}</p>}
         </button>
-    )
+    );
 }
 
-export default Title;
+export default TitleCard;

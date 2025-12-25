@@ -1,19 +1,17 @@
-import { useEffect, useState } from 'react';
-import TitleCard from '../../Components/TitleCard/TitlesCard';
-import Tags from '../../Components/Tags/Tags';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import TitleCard from "../../Components/TitleCard/TitlesCard";
+import Tags from "../../Components/Tags/Tags";
 
 interface Writing {
   id: number;
   title: string;
   tag: string;
   date: string;
-  writing: string;
-  uploaded: boolean;
 }
 
 function FilterByTagsPage() {
-  const { tag } = useParams();
+  const { tag } = useParams<{ tag: string }>();
   const [writings, setWritings] = useState<Writing[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -22,12 +20,12 @@ function FilterByTagsPage() {
   useEffect(() => {
     const fetchWritings = async () => {
       try {
-        const response = await fetch("https://pwf-backend-code-production.up.railway.app/api/writings");
+        const response = await fetch("/data/writings.json");
         const data: Writing[] = await response.json();
         setWritings(data);
-        setLoading(false);
       } catch (err) {
         console.error("Error fetching writings:", err);
+      } finally {
         setLoading(false);
       }
     };
@@ -50,7 +48,6 @@ function FilterByTagsPage() {
           title={writing.title}
           date={writing.date}
           tag={<Tags label={writing.tag} />}
-          writing={writing.writing}
         />
       ))}
     </div>

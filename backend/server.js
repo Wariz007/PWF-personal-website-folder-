@@ -17,7 +17,8 @@ const __dirname = dirname(__filename);
 // --- MIDDLEWARE ---
 app.use(cors({
   origin: [
-    "http://localhost:3000",                      
+    "http://localhost:3000",
+    "http://localhost:5173",                       
     "https://olusanyaolabodeabdulwariz.com",     
     "https://www.olusanyaolabodeabdulwariz.com"
   ],

@@ -5,14 +5,12 @@ import Tags from "../../Components/Tags/Tags";
 import ReactMarkdown from "react-markdown";
 
 interface Writing {
-  _id: string;       // MongoDB ObjectId
   id: number;        // numeric id
   title: string;
   tag: string;
   date: string;
-  uploaded: boolean;
   writing: string;
-  image?: string;    // optional, in case no image
+  image?: string;    // optional
 }
 
 function WritingsPage() {
@@ -21,21 +19,24 @@ function WritingsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://pwf-backend-code-production.up.railway.app/api/writings")
-      .then((res) => res.json())
-      .then((data: Writing[]) => {
-        console.log("Fetched writings:", data);
+    const fetchWriting = async () => {
+      try {
+        const response = await fetch("/data/writings.json");
+        const data: Writing[] = await response.json();
 
-        // Compare numeric id from URL to database numeric id
+        // Find the writing that matches the numeric id from the URL
         const found = data.find((w) => w.id === Number(id));
 
         setWriting(found || null);
-        setLoading(false);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("Error fetching writings:", err);
+        setWriting(null);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchWriting();
   }, [id]);
 
   if (loading) return <p>Loading...</p>;
@@ -52,10 +53,7 @@ function WritingsPage() {
 
       {writing.image && (
         <div className="writing-image">
-          <img
-            src={writing.image}
-            alt={writing.title}
-          />
+          <img src={writing.image} alt={writing.title} />
         </div>
       )}
 
