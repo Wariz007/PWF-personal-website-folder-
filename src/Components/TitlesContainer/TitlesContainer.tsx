@@ -17,7 +17,7 @@ function TitlesContainer() {
     const fetchTitles = async () => {
       try {
         // Fetch from local JSON in public folder
-        const response = await fetch("/data/writings.json");
+        const response = await fetch(`${import.meta.env.BASE_URL}data/writings.json`);
         const data: Title[] = await response.json();
 
         // helper to safely convert "DD-MM-YYYY" or "DD-MM-YY" -> "YYYY-MM-DD"

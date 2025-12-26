@@ -20,7 +20,7 @@ function FilterByTagsPage() {
   useEffect(() => {
     const fetchWritings = async () => {
       try {
-        const response = await fetch("/data/writings.json");
+        const response = await fetch(`${import.meta.env.BASE_URL}data/writings.json`);
         const data: Writing[] = await response.json();
         setWritings(data);
       } catch (err) {

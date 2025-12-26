@@ -21,7 +21,7 @@ function WritingsPage() {
   useEffect(() => {
     const fetchWriting = async () => {
       try {
-        const response = await fetch("/data/writings.json");
+        const response = await fetch(`${import.meta.env.BASE_URL}data/writings.json`);
         const data: Writing[] = await response.json();
 
         // Find the writing that matches the numeric id from the URL
@@ -53,7 +53,7 @@ function WritingsPage() {
 
       {writing.image && (
         <div className="writing-image">
-          <img src={writing.image} alt={writing.title} />
+          <img src={`${import.meta.env.BASE_URL}${writing.image}`} alt={writing.title} />
         </div>
       )}
 
