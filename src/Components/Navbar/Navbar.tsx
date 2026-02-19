@@ -20,6 +20,7 @@ function Navbar() {
                 <button onClick={() => handleTagClick('Entrepreneurship')} className='btns'><Tags label='Entrepreneurship '/></button>
                 <button onClick={() => handleTagClick('Books')} className='btns'><Tags label='Books'/></button>
                 <button onClick={() => handleTagClick('Technology')} className='btns'><Tags label='Technology'/></button>
+                <button onClick={() => handleTagClick('Extras')} className='btns'><Tags label='Extras'/></button>
             </div>
             <Link to='/filter'>
                 <img className='burger-menu' src={BurgerMenu} alt="Menu" />

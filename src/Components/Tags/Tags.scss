@@ -33,4 +33,12 @@
             background-color: darken($iron-gray, 5%);
         }
     }
+
+    &.extras {
+        background-color: #DAA520;
+
+        &:hover {
+            background-color: darken(#DAA520, 5%);
+        }
+    }
 }

@@ -11,6 +11,7 @@ function FilterPage() {
                 <button onClick={() => handleTagClick('Entrepreneurship')}>Entrepreneurship</button>
                 <button onClick={() => handleTagClick('Books')}>Books</button>
                 <button onClick={() => handleTagClick('Technology')}>Technology</button>
+                <button onClick={() => handleTagClick('Extras')}>Extras</button>
             </div>
         </div>
     )
