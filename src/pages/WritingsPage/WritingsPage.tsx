@@ -53,7 +53,10 @@ function WritingsPage() {
 
       {writing.image && (
         <div className="writing-image">
-          <img src={`/${writing.image}`} alt={writing.title} />
+          <img 
+            src={writing.image.startsWith('http') ? writing.image : `/${writing.image}`} 
+            alt={writing.title} 
+          />
         </div>
       )}
 
