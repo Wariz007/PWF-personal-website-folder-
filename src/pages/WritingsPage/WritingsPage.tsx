@@ -3,14 +3,15 @@ import { useEffect, useState } from "react";
 import "../WritingsPage/WritingsPage.scss";
 import Tags from "../../Components/Tags/Tags";
 import ReactMarkdown from "react-markdown";
+import { supabase } from "../../lib/supabase";
 
 interface Writing {
-  id: number;        // numeric id
+  id: string;
   title: string;
   tag: string;
   date: string;
-  writing: string;
-  image?: string;    // optional
+  content: string;
+  image?: string;
 }
 
 function WritingsPage() {
@@ -20,20 +21,19 @@ function WritingsPage() {
 
   useEffect(() => {
     const fetchWriting = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.BASE_URL}data/writings.json`);
-        const data: Writing[] = await response.json();
+      const { data, error } = await supabase
+        .from('writings')
+        .select('id, title, tag, date, content, image')
+        .eq('id', id)
+        .single();
 
-        // Find the writing that matches the numeric id from the URL
-        const found = data.find((w) => w.id === Number(id));
-
-        setWriting(found || null);
-      } catch (err) {
-        console.error("Error fetching writings:", err);
+      if (error) {
+        console.error('Error fetching writing:', error);
         setWriting(null);
-      } finally {
-        setLoading(false);
+      } else {
+        setWriting(data);
       }
+      setLoading(false);
     };
 
     fetchWriting();
@@ -53,12 +53,12 @@ function WritingsPage() {
 
       {writing.image && (
         <div className="writing-image">
-          <img src={`${import.meta.env.BASE_URL}${writing.image}`} alt={writing.title} />
+          <img src={`/${writing.image}`} alt={writing.title} />
         </div>
       )}
 
       <div className="writing-content">
-        <ReactMarkdown>{writing.writing}</ReactMarkdown>
+        <ReactMarkdown>{writing.content}</ReactMarkdown>
       </div>
     </div>
   );

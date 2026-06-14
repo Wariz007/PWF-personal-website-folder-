@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import TitleCard from "../../Components/TitleCard/TitlesCard";
 import Tags from "../../Components/Tags/Tags";
+import { supabase } from "../../lib/supabase";
 
 interface Writing {
-  id: number;
+  id: string;
   title: string;
   tag: string;
   date: string;
@@ -15,33 +16,30 @@ function FilterByTagsPage() {
   const [writings, setWritings] = useState<Writing[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const normalizedTag = tag?.toLowerCase();
-
   useEffect(() => {
     const fetchWritings = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.BASE_URL}data/writings.json`);
-        const data: Writing[] = await response.json();
-        setWritings(data);
-      } catch (err) {
-        console.error("Error fetching writings:", err);
-      } finally {
-        setLoading(false);
+      const { data, error } = await supabase
+        .from('writings')
+        .select('id, title, tag, date')
+        .ilike('tag', tag || '')
+        .order('date', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching writings:', error);
+      } else {
+        setWritings(data || []);
       }
+      setLoading(false);
     };
 
     fetchWritings();
-  }, []);
+  }, [tag]);
 
   if (loading) return <p>Loading writings...</p>;
 
-  const filteredWritings = writings.filter(
-    (writing) => writing.tag.toLowerCase() === normalizedTag
-  );
-
   return (
     <div className="FilterByTagsPage">
-      {filteredWritings.map((writing) => (
+      {writings.map((writing) => (
         <TitleCard
           key={writing.id}
           id={writing.id}

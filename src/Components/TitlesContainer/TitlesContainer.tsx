@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import TitleCard from '../TitleCard/TitlesCard';
 import Tag from '../Tags/Tags';
+import { supabase } from '../../lib/supabase';
 
 type Title = {
-  id: number;
+  id: string;
   title: string;
   tag: string;
   date: string;
@@ -15,32 +16,18 @@ function TitlesContainer() {
 
   useEffect(() => {
     const fetchTitles = async () => {
-      try {
-        // Fetch from local JSON in public folder
-        const response = await fetch(`${import.meta.env.BASE_URL}data/writings.json`);
-        const data: Title[] = await response.json();
+      const { data, error } = await supabase
+        .from('writings')
+        .select('id, title, tag, date, is_pinned')
+        .order('is_pinned', { ascending: false })
+        .order('date', { ascending: false });
 
-        // helper to safely convert "DD-MM-YYYY" or "DD-MM-YY" -> "YYYY-MM-DD"
-        const parseDate = (dateStr: string) => {
-          const parts = dateStr.split('-');
-          let year = parts[2];
-          if (year.length === 2) year = `20${year}`;
-          return new Date(`${year}-${parts[1]}-${parts[0]}`);
-        };
-
-        // Pin logic + sorting
-        const sortedData = data.sort((a, b) => {
-          if (a.title === 'My plans. My ambition') return -1;
-          if (b.title === 'My plans. My ambition') return 1;
-          return parseDate(b.date).getTime() - parseDate(a.date).getTime();
-        });
-
-        setTitles(sortedData);
-      } catch (err) {
-        console.error('Error fetching titles:', err);
-      } finally {
-        setLoading(false);
+      if (error) {
+        console.error('Error fetching titles:', error);
+      } else {
+        setTitles(data || []);
       }
+      setLoading(false);
     };
 
     fetchTitles();

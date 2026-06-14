@@ -1,20 +1,20 @@
 import { useNavigate } from "react-router-dom";
 
 type TitleProps = {
-    id: number;
+    id: string;
     title: string;
     tag: React.ReactNode;
     date: string;
 };
 
 function TitleCard({ id, title, tag, date }: TitleProps) {
-    const [day, month, year] = date.split("-");
+    const [year, month, day] = date.split("-");
     const navigate = useNavigate();
 
     return (
         <button
             key={id}
-            className={`title ${id}`}
+            className={`title`}
             onClick={() => navigate(`/writings/${id}`)}
         >
             <div className="date">
