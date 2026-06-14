@@ -5,6 +5,7 @@ import TitlesContainer from "./Components/TitlesContainer/TitlesContainer";
 import FilterPage from '../src/pages/FilterPage/FilterPage';
 import FilterByTagsPage from './pages/FilterByTagsPage/FilterByTagsPage';
 import WritingsPage from './pages/WritingsPage/WritingsPage';
+import { Analytics } from "@vercel/analytics/next"
 
 
 
@@ -12,7 +13,8 @@ function Root() {
     return (
         <div>
             <Navbar />
-
+            <Analytics />
+        
             <Routes>
                 {/*Home page*/}
                 <Route path="/" element={
@@ -27,6 +29,7 @@ function Root() {
                 {/*Filter by tags page*/}
                 <Route path="/tag/:tag" element={<FilterByTagsPage />} />
 
+                
                 {/*page for writings*/}
                 <Route path="/writings/:id" element={<WritingsPage />} />
             </Routes>
