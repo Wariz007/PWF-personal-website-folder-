@@ -1,5 +1,5 @@
-@import '../../styles/Config';
-@import '../../styles/Mixins';
+@use '../../styles/Config' as *;
+@use '../../styles/Mixins' as *;
 
 .about-container {
     display: flex;

@@ -1,4 +1,4 @@
-@import '../../styles/Mixins';
+@use '../../styles/Mixins' as *;
 
 .titles-container {
     display: flex;

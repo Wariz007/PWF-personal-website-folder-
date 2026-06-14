@@ -1,4 +1,4 @@
-@import '../../styles/_Config.scss';
+@use '../../styles/_Config.scss' as *;
 
 .tags {
     border-radius: 5px;

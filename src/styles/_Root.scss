@@ -1,4 +1,4 @@
-@import '../styles/mixins';
+@use '../styles/Mixins' as *;
 
 .content-container {
     padding-block: 20px;

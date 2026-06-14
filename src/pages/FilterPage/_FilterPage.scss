@@ -1,4 +1,4 @@
-@import '/src/styles/Config';
+@use '/src/styles/Config' as *;
 
 .filter-contents {
     height: calc(100vh - 60px);
