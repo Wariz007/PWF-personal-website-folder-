@@ -1,6 +1,6 @@
 import Email from '../../assets/Images/Gmail.png';
-import X from '../../Assets/Images/X_logo 1.png';
-import Github from '../../Assets/Images/Github icon 1.png';
+import X from '../../assets/Images/X_logo 1.png';
+import Github from '../../aGithub icon 1.png';
 
 function About() {
     return (
