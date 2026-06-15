@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "../WritingsPage/WritingsPage.scss";
 import Tags from "../../Components/Tags/Tags";
 import ReactMarkdown from "react-markdown";
-import { supabase } from "../../lib/supabase";
+import { supabase } from "../../utils/supabase"; 
 
 interface Writing {
   id: string;
@@ -20,7 +20,10 @@ function WritingsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!id) return;
+
     const fetchWriting = async () => {
+      setLoading(true);
       const { data, error } = await supabase
         .from('writings')
         .select('id, title, tag, date, content, image')
@@ -28,10 +31,10 @@ function WritingsPage() {
         .single();
 
       if (error) {
-        console.error('Error fetching writing:', error);
+        console.error('Error fetching writing:', error.message);
         setWriting(null);
       } else {
-        setWriting(data);
+        setWriting(data as Writing); 
       }
       setLoading(false);
     };
@@ -39,8 +42,8 @@ function WritingsPage() {
     fetchWriting();
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
-  if (!writing) return <p>Writing not found.</p>;
+  if (loading) return <p className="loading-text">Loading...</p>;
+  if (!writing) return <p className="error-text">Writing not found.</p>;
 
   return (
     <div className="writing-container">
